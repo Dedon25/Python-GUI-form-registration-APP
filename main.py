@@ -2,17 +2,15 @@ import tkinter as tk
 from tkinter import ttk
 from tkcalendar import DateEntry
 window = tk.Tk()
-window.title("Registration form")
+window.title("login form")
 window.geometry("480x480")
 
-# creating a frame
 frame = tk.Frame(window)
 frame.pack(fill="both",side="top")
 
 user_personal_info_frame = tk.LabelFrame(frame,text="Personal Info:")
 user_personal_info_frame.pack(side="left",padx=20,pady=15)
-
-# creating widgets
+#creating widgets
 first_name_label = tk.Label(user_personal_info_frame,text="First name")
 first_name_label.grid(row=0,column=0)
 
@@ -65,7 +63,7 @@ title_label =tk.Label(user_personal_info_frame,text="Title:")
 title_label.grid(row=16,column=0)
 
 
-# the inputs section widgets
+
 first_name_entry = tk.Entry(user_personal_info_frame)
 first_name_entry.grid(row=0,column=1)
 
@@ -123,11 +121,11 @@ place_of_birth_entry.grid(row=15,column=1)
 title_entry =tk.Entry(user_personal_info_frame)
 title_entry.grid(row=16,column=1)
 
-# creating a label frame
+#user family background
 user_family_background = tk.LabelFrame(frame,text="Family Background:")
 user_family_background.pack(side="left",padx=20,pady=15)
 
-# user family background label frame
+
 father_name_label =tk.Label(user_family_background,text="Father's Name:")
 father_name_label.grid(row=0,column=0)
 
@@ -146,11 +144,30 @@ business_address_label.grid(row=4,column=0)
 number_of_children_label =tk.Label(user_family_background,text="No. of Children:")
 number_of_children_label.grid(row=5,column=0)
 
-# creating a label frame
+
+father_name_entry = tk.Entry(user_family_background)
+father_name_entry.grid(row=0,column=1)
+
+mother_name_entry =tk.Entry(user_family_background)
+mother_name_entry.grid(row=1,column=1)
+
+spouse_full_name_entry =tk.Entry(user_family_background)
+spouse_full_name_entry.grid(row=2,column=1)
+
+occupation_entry =tk.Entry(user_family_background)
+occupation_entry.grid(row=3,column=1)
+
+business_address_entry =tk.Entry(user_family_background)
+business_address_entry.grid(row=4,column=1)
+
+number_of_children_spinbox =tk.Spinbox(user_family_background,from_=0,to="infinity")
+number_of_children_spinbox.grid(row=5,column=1)
+
+#user educational background
 user_educational_background = tk.LabelFrame(frame,text="Educational Background:")
 user_educational_background.pack(side="left",padx=20,pady=15)
 
-# user educational background label frame
+
 level_label =tk.Label(user_educational_background,text="LEVEL")
 level_label.grid(row=0,column=0)
 
