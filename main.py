@@ -1,188 +1,141 @@
 import tkinter as tk
-from tkinter import ttk
+from tkinter import ttk, messagebox
 from tkcalendar import DateEntry
+
 window = tk.Tk()
-window.title("Registration form")
-window.geometry("480x480")
+window.title("Registration Form")
+window.geometry("1200x520")
 
-# creating a frame
+# ================= MAIN FRAME =================
 frame = tk.Frame(window)
-frame.pack(fill="both",side="top")
+frame.pack(fill="both", side="top")
 
-user_personal_info_frame = tk.LabelFrame(frame,text="Personal Info:")
-user_personal_info_frame.pack(side="left",padx=20,pady=15)
+# ================= PERSONAL INFO =================
+user_personal_info_frame = tk.LabelFrame(frame, text="Personal Info:")
+user_personal_info_frame.pack(side="left", padx=10, pady=10)
 
-# creating widgets
-first_name_label = tk.Label(user_personal_info_frame,text="First name")
-first_name_label.grid(row=0,column=0)
+labels = [
+    "First name", "Second name", "Surname", "Age", "Gender",
+    "Date Of Birth", "Civil Status", "Citizenship", "Blood Type",
+    "Height", "Weight", "T.I.N", "National ID number",
+    "Home Address", "Email", "Place of Birth", "Title"
+]
 
-second_name_label = tk.Label(user_personal_info_frame,text="Second name")
-second_name_label.grid(row=1,column=0)
+for i, label in enumerate(labels):
+    tk.Label(user_personal_info_frame, text=label).grid(row=i, column=0, sticky="w")
 
-surname_label = tk.Label(user_personal_info_frame,text="Surname")
-surname_label.grid(row=2,column=0)
+first_name = tk.Entry(user_personal_info_frame)
+second_name = tk.Entry(user_personal_info_frame)
+surname = tk.Entry(user_personal_info_frame)
+age = tk.Spinbox(user_personal_info_frame, from_=0, to=120)
 
-age_label = tk.Label(user_personal_info_frame,text="Age:")
-age_label.grid(row=3,column=0)
+gender = tk.StringVar()
+tk.Radiobutton(user_personal_info_frame, text="Male", variable=gender, value="Male").grid(row=4, column=1)
+tk.Radiobutton(user_personal_info_frame, text="Female", variable=gender, value="Female").grid(row=4, column=2)
 
-gender_label = tk.Label(user_personal_info_frame,text="Gender:")
-gender_label.grid(row=4,column=0)
+dob = DateEntry(user_personal_info_frame, date_pattern="yyyy-mm-dd")
 
-date_of_birth_label = tk.Label(user_personal_info_frame,text="Date Of Birth:")
-date_of_birth_label.grid(row=5,column=0)
+civil_status = tk.StringVar()
+tk.Radiobutton(user_personal_info_frame, text="Married", variable=civil_status, value="Married").grid(row=6, column=1)
+tk.Radiobutton(user_personal_info_frame, text="Single", variable=civil_status, value="Single").grid(row=6, column=2)
 
-civil_status_label =tk.Label(user_personal_info_frame,text="Civil Status:")
-civil_status_label.grid(row=6,column=0)
+citizenship = ttk.Combobox(user_personal_info_frame, values=[
+    "By Birth", "By Naturalisation", "By Descent"
+])
 
-citizenship_label =tk.Label(user_personal_info_frame,text="Citizenship:")
-citizenship_label.grid(row=7,column=0)
+blood_type = ttk.Combobox(user_personal_info_frame, values=[
+    "A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-"
+])
 
-blood_type_label =tk.Label(user_personal_info_frame,text="Blood Type:")
-blood_type_label.grid(row=8,column=0)
+height = tk.Spinbox(user_personal_info_frame, from_=0, to=300)
+weight = tk.Spinbox(user_personal_info_frame, from_=0, to=300)
+tin = tk.Entry(user_personal_info_frame)
+nid = tk.Entry(user_personal_info_frame)
+address = tk.Entry(user_personal_info_frame)
+email = tk.Entry(user_personal_info_frame)
+pob = tk.Entry(user_personal_info_frame)
+title = tk.Entry(user_personal_info_frame)
 
-height_label =tk.Label(user_personal_info_frame,text="Height:")
-height_label.grid(row=9,column=0)
+entries = [
+    first_name, second_name, surname, age, None, dob,
+    None, citizenship, blood_type, height, weight,
+    tin, nid, address, email, pob, title
+]
 
-weight_label =tk.Label(user_personal_info_frame,text="Weight:")
-weight_label.grid(row=10,column=0)
+for i, entry in enumerate(entries):
+    if entry:
+        entry.grid(row=i, column=1)
 
-TIN_label =tk.Label(user_personal_info_frame,text="T.I.N:")
-TIN_label.grid(row=11,column=0)
+# ================= FAMILY BACKGROUND =================
+user_family_background = tk.LabelFrame(frame, text="Family Background:")
+user_family_background.pack(side="left", padx=10, pady=10)
 
-National_id_num_label =tk.Label(user_personal_info_frame,text="National ID number:")
-National_id_num_label.grid(row=12,column=0)
+tk.Label(user_family_background, text="Father's Name").grid(row=0, column=0)
+tk.Label(user_family_background, text="Mother's Name").grid(row=1, column=0)
+tk.Label(user_family_background, text="Spouse Name").grid(row=2, column=0)
+tk.Label(user_family_background, text="Occupation").grid(row=3, column=0)
+tk.Label(user_family_background, text="Work Address").grid(row=4, column=0)
+tk.Label(user_family_background, text="No. of Children").grid(row=5, column=0)
 
-address_label =tk.Label(user_personal_info_frame,text="Home Address:")
-address_label.grid(row=13,column=0)
+father = tk.Entry(user_family_background)
+mother = tk.Entry(user_family_background)
+spouse = tk.Entry(user_family_background)
+occupation = tk.Entry(user_family_background)
+work_address = tk.Entry(user_family_background)
+children = tk.Spinbox(user_family_background, from_=0, to=20)
 
-email_label =tk.Label(user_personal_info_frame,text="Email:")
-email_label.grid(row=14,column=0)
+family_entries = [father, mother, spouse, occupation, work_address, children]
 
-place_of_birth_label =tk.Label(user_personal_info_frame,text="Place of Birth:")
-place_of_birth_label.grid(row=15,column=0)
+for i, entry in enumerate(family_entries):
+    entry.grid(row=i, column=1)
 
-title_label =tk.Label(user_personal_info_frame,text="Title:")
-title_label.grid(row=16,column=0)
+# ================= EDUCATIONAL BACKGROUND =================
+user_educational_background = tk.LabelFrame(frame, text="Educational Background:")
+user_educational_background.pack(side="left", padx=10, pady=10)
 
+headers = ["Level", "School", "Course", "From", "To", "Achievements"]
+for col, header in enumerate(headers):
+    tk.Label(user_educational_background, text=header).grid(row=0, column=col)
 
-# the inputs section widgets
-first_name_entry = tk.Entry(user_personal_info_frame)
-first_name_entry.grid(row=0,column=1)
+levels = ["Nursery", "Primary", "O-Level", "A-Level", "University"]
+education_entries = {}
 
-second_name_entry = tk.Entry(user_personal_info_frame)
-second_name_entry.grid(row=1,column=1)
+for row, level in enumerate(levels, start=1):
+    tk.Label(user_educational_background, text=level).grid(row=row, column=0)
+    school = tk.Entry(user_educational_background)
+    course = tk.Entry(user_educational_background)
+    year_from = tk.Entry(user_educational_background, width=6)
+    year_to = tk.Entry(user_educational_background, width=6)
+    achievement = tk.Entry(user_educational_background)
 
-surname_entry = tk.Entry(user_personal_info_frame)
-surname_entry.grid(row=2,column=1)
+    school.grid(row=row, column=1)
+    course.grid(row=row, column=2)
+    year_from.grid(row=row, column=3)
+    year_to.grid(row=row, column=4)
+    achievement.grid(row=row, column=5)
 
-age_spinbox = tk.Spinbox(user_personal_info_frame,from_=0,to=100)
-age_spinbox.grid(row=3,column=1)
+    education_entries[level] = (school, course, year_from, year_to, achievement)
 
-gender_Male_checkbutton = tk.Checkbutton(user_personal_info_frame,text="MALE")
-gender_Male_checkbutton.grid(row=4,column=1)
+# ================= SUBMIT FUNCTION =================
+def submit_form():
+    data = {
+        "First Name": first_name.get(),
+        "Surname": surname.get(),
+        "Gender": gender.get(),
+        "DOB": dob.get(),
+        "Email": email.get(),
+        "Father": father.get(),
+        "Mother": mother.get()
+    }
 
-gender_Female_checkbutton = tk.Checkbutton(user_personal_info_frame,text="FEMALE")
-gender_Female_checkbutton.grid(row=4,column=2)
+    print("\n--- REGISTRATION DATA ---")
+    for k, v in data.items():
+        print(f"{k}: {v}")
 
-date_of_birth_data_entry = DateEntry(user_personal_info_frame, date_pattern="yyyy-mm-dd")
-date_of_birth_data_entry.grid(row=5,column=1)
+    messagebox.showinfo("Success", "Form submitted successfully!")
 
-civil_status_married_checkbutton =tk.Checkbutton(user_personal_info_frame,text="Married")
-civil_status_married_checkbutton.grid(row=6,column=1)
-
-civil_status_N_married_checkbutton =tk.Checkbutton(user_personal_info_frame,text="Not Married")
-civil_status_N_married_checkbutton.grid(row=6,column=2)
-
-citizenship_combobox =ttk.Combobox(user_personal_info_frame,values=["select type","By Naturalisation","By Decscent","By Birth"])
-citizenship_combobox.grid(row=7,column=1)
-
-blood_type_combobox =ttk.Combobox(user_personal_info_frame,values=["select blood type","A+","A-","B+","B-","0+","O-","AB+","AB-"])
-blood_type_combobox.grid(row=8,column=1)
-
-height_spinbox =tk.Spinbox(user_personal_info_frame,from_=0,to="infinity")
-height_spinbox.grid(row=9,column=1)
-
-weight_spinbox =tk.Spinbox(user_personal_info_frame,from_=0,to="infinity")
-weight_spinbox.grid(row=10,column=1)
-
-TIN_entry =tk.Entry(user_personal_info_frame)
-TIN_entry.grid(row=11,column=1)
-
-National_id_num_entry =tk.Entry(user_personal_info_frame)
-National_id_num_entry.grid(row=12,column=1)
-
-address_entry =tk.Entry(user_personal_info_frame)
-address_entry.grid(row=13,column=1)
-
-email_entry =tk.Entry(user_personal_info_frame)
-email_entry.grid(row=14,column=1)
-
-place_of_birth_entry =tk.Entry(user_personal_info_frame)
-place_of_birth_entry.grid(row=15,column=1)
-
-title_entry =tk.Entry(user_personal_info_frame)
-title_entry.grid(row=16,column=1)
-
-# creating a label frame
-user_family_background = tk.LabelFrame(frame,text="Family Background:")
-user_family_background.pack(side="left",padx=20,pady=15)
-
-# user family background label frame
-father_name_label =tk.Label(user_family_background,text="Father's Name:")
-father_name_label.grid(row=0,column=0)
-
-mother_name_label =tk.Label(user_family_background,text="Mother's Name:")
-mother_name_label.grid(row=1,column=0)
-
-spouse_full_name_label =tk.Label(user_family_background,text="Spouse's Full Name")
-spouse_full_name_label.grid(row=2,column=0)
-
-occupation_label =tk.Label(user_family_background,text="Occupation:")
-occupation_label.grid(row=3,column=0)
-
-business_address_label =tk.Label(user_family_background,text="Business/Work Address:")
-business_address_label.grid(row=4,column=0)
-
-number_of_children_label =tk.Label(user_family_background,text="No. of Children:")
-number_of_children_label.grid(row=5,column=0)
-
-# creating a label frame
-user_educational_background = tk.LabelFrame(frame,text="Educational Background:")
-user_educational_background.pack(side="left",padx=20,pady=15)
-
-# user educational background label frame
-level_label =tk.Label(user_educational_background,text="LEVEL")
-level_label.grid(row=0,column=0)
-
-nursery_label =tk.Label(user_educational_background,text="nursery")
-nursery_label.grid(row=1,column=0)
-
-primary_label =tk.Label(user_educational_background,text="primary")
-primary_label.grid(row=2,column=0)
-
-o_level_label =tk.Label(user_educational_background,text="o level")
-o_level_label.grid(row=3,column=0)
-
-a_level_label =tk.Label(user_educational_background,text="A level")
-a_level_label.grid(row=4,column=0)
-
-university_label =tk.Label(user_educational_background,text="university")
-university_label.grid(row=5,column=0)
-
-name_of_school_label =tk.Label(user_educational_background,text="name of school")
-name_of_school_label.grid(row=0,column=1)
-
-basic_education_label =tk.Label(user_educational_background,text="combination/course")
-basic_education_label.grid(row=0,column=2)
-
-from_label =tk.Label(user_educational_background,text="From")
-from_label.grid(row=0,column=3)
-
-to_label =tk.Label(user_educational_background,text="To")
-to_label.grid(row=0,column=4)
-
-achievement_label=tk.Label(user_educational_background,text="Achievements")
-achievement_label.grid(row=0,column=5)
-
+# ================= SUBMIT BUTTON =================
+submit_btn = tk.Button(window, text="Submit Form", command=submit_form, bg="green", fg="white")
+submit_btn.pack(pady=10)
 
 window.mainloop()
